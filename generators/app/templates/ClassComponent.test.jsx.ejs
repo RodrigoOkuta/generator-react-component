@@ -1,0 +1,8 @@
+import React from 'react'
+import { render, shallow } from 'enzyme'
+import ClassComponent from './ClassComponent.jsx'
+
+test("It should render the ClassComponent", () => {
+    const actual = render(<ClassComponent/>)
+    expect(actual).toMatchSnapshot()
+})

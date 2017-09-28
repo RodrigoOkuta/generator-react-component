@@ -2,20 +2,33 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
+const path = require('path');
 
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
-    this.log(yosay(
-      'Welcome to the primo ' + chalk.red('generator-react-class-component') + ' generator!'
-    ));
+    this.log(
+      yosay(
+        'Welcome to the primo ' +
+          chalk.red('generator-react-class-component') +
+          ' generator!'
+      )
+    );
 
-    const prompts = [{
-      type: 'confirm',
-      name: 'someAnswer',
-      message: 'Would you like to enable this option?',
-      default: true
-    }];
+    const prompts = [
+      {
+        type: 'text',
+        name: 'folder',
+        message: 'Where do you want to create the component?',
+        default: path.resolve('.')
+      },
+      {
+        type: 'text',
+        name: 'name',
+        message: "What is the Class's Name?",
+        default: 'MyComponent'
+      }
+    ];
 
     return this.prompt(prompts).then(props => {
       // To access props later use this.props.someAnswer;
@@ -24,9 +37,16 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    const folder = path.resolve(this.props.folder);
+
     this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
+      this.templatePath('ClassComponent.jsx.ejs'),
+      this.destinationPath(path.join(folder, `${this.props.name}.jsx`))
+    );
+
+    this.fs.copy(
+      this.templatePath('ClassComponent.test.jsx.ejs'),
+      this.destinationPath(path.join(folder, `${this.props.name}.test.jsx`))
     );
   }
 
