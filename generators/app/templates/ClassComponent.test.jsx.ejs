@@ -1,8 +1,8 @@
 import React from 'react'
 import { render, shallow } from 'enzyme'
-import ClassComponent from './ClassComponent.jsx'
+import <%= name %> from './<%= name %>.jsx'
 
-test("It should render the ClassComponent", () => {
-    const actual = render(<ClassComponent/>)
+test("It should render the <%= name %>", () => {
+    const actual = render(<<%= name %>/>)
     expect(actual).toMatchSnapshot()
 })
