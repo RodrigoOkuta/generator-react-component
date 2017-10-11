@@ -39,14 +39,16 @@ module.exports = class extends Generator {
   writing() {
     const folder = path.resolve(this.props.folder);
 
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath('ClassComponent.jsx.ejs'),
-      this.destinationPath(path.join(folder, `${this.props.name}.jsx`))
+      this.destinationPath(path.join(folder, `${this.props.name}.jsx`)),
+      {name: this.props.name}
     );
 
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath('ClassComponent.test.jsx.ejs'),
-      this.destinationPath(path.join(folder, `${this.props.name}.test.jsx`))
+      this.destinationPath(path.join(folder, `${this.props.name}.test.jsx`)),
+      {name: this.props.name}
     );
   }
 
