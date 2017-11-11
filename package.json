@@ -1,24 +1,17 @@
 {
   "name": "generator-react-class-component",
   "version": "0.0.0",
-  "description": "Generate a React class component (class extends React.Component) and a Jest test alongside",
+  "description":
+    "Generate a React class component (class extends React.Component) and a Jest test alongside",
   "homepage": "",
   "author": {
     "name": "Tamara Temple",
     "email": "tamouse@gmail.com",
-    "url": ""
+    "url": "https://github.com/tamouse"
   },
-  "files": [
-    "generators"
-  ],
+  "files": ["generators"],
   "main": "generators/index.js",
-  "keywords": [
-    "react",
-    "class",
-    "component",
-    "jest",
-    "yeoman-generator"
-  ],
+  "keywords": ["react", "class", "component", "jest", "yeoman-generator"],
   "devDependencies": {
     "yeoman-test": "^1.6.0",
     "yeoman-assert": "^3.0.0",
@@ -43,26 +36,15 @@
     "testEnvironment": "node"
   },
   "scripts": {
-    "prepublish": "nsp check",
-    "pretest": "eslint .",
-    "precommit": "lint-staged",
+    "pretest": "eslint . --fix",
     "test": "jest"
   },
   "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add"
-    ],
-    "*.json": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.js": ["eslint --fix", "git add"],
+    "*.json": ["prettier --write", "git add"]
   },
   "eslintConfig": {
-    "extends": [
-      "xo",
-      "prettier"
-    ],
+    "extends": ["xo", "prettier"],
     "env": {
       "jest": true,
       "node": true
@@ -76,9 +58,7 @@
         }
       ]
     },
-    "plugins": [
-      "prettier"
-    ]
+    "plugins": ["prettier"]
   },
   "repository": "tamouse/generator-react-class-component",
   "license": "MIT"

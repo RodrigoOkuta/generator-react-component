@@ -2,7 +2,6 @@ import React from 'react'
 import { render, shallow } from 'enzyme'
 import <%= name %> from './<%= name %>.jsx'
 
-test("It should render the <%= name %>", () => {
-    const actual = render(<<%= name %>/>)
-    expect(actual).toMatchSnapshot()
+describe("<%= name %>", () => {
+
 })
