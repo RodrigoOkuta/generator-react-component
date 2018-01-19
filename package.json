@@ -43,8 +43,8 @@
     "testEnvironment": "node"
   },
   "scripts": {
-    "prepublish": "nsp check",
-    "pretest": "eslint .",
+    "pretty": "prettier --write '{generators,__tests__}/**/*.js'",
+    "pretest": "npm run pretty && eslint .",
     "precommit": "lint-staged",
     "test": "jest"
   },
@@ -71,7 +71,7 @@
       "prettier/prettier": [
         "error",
         {
-          "singleQuote": true,
+          "singleQuote": false,
           "printWidth": 90
         }
       ]

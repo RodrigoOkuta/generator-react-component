@@ -1,32 +1,32 @@
-'use strict';
-const Generator = require('yeoman-generator');
-const chalk = require('chalk');
-const yosay = require('yosay');
-const path = require('path');
+"use strict";
+const Generator = require("yeoman-generator");
+const chalk = require("chalk");
+const yosay = require("yosay");
+const path = require("path");
 
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
     this.log(
       yosay(
-        'Welcome to the primo ' +
-          chalk.red('generator-react-class-component') +
-          ' generator!'
+        "Welcome to the primo " +
+          chalk.red("generator-react-class-component") +
+          " generator!"
       )
     );
 
     const prompts = [
       {
-        type: 'text',
-        name: 'folder',
-        message: 'Where do you want to create the component?',
-        default: path.resolve('.')
+        type: "text",
+        name: "folder",
+        message: "Where do you want to create the component?",
+        default: path.resolve(".")
       },
       {
-        type: 'text',
-        name: 'name',
+        type: "text",
+        name: "name",
         message: "What is the Class's Name?",
-        default: 'MyComponent'
+        default: "MyComponent"
       }
     ];
 
@@ -40,15 +40,15 @@ module.exports = class extends Generator {
     const folder = path.resolve(this.props.folder);
 
     this.fs.copyTpl(
-      this.templatePath('ClassComponent.jsx.ejs'),
+      this.templatePath("ClassComponent.jsx.ejs"),
       this.destinationPath(path.join(folder, `${this.props.name}.jsx`)),
-      {name: this.props.name}
+      { name: this.props.name }
     );
 
     this.fs.copyTpl(
-      this.templatePath('ClassComponent.test.jsx.ejs'),
-      this.destinationPath(path.join(folder, `${this.props.name}.test.jsx`)),
-      {name: this.props.name}
+      this.templatePath("ClassComponent.spec.jsx.ejs"),
+      this.destinationPath(path.join(folder, `${this.props.name}.spec.jsx`)),
+      { name: this.props.name }
     );
   }
 
