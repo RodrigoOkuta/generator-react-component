@@ -1,10 +1,24 @@
 import React from 'react'
 import T from 'prop-types'
 
+/**
+ * class description
+ */
 export class <%= name %> extends React.Component {
-  constructor(props) {
-    super(props)
+  static propTypes = {
+    /** property documentation */
+    prop1: T.string.isRequired,
+    /** property documentation */
+    prop2: T.func.isRequired,
+    /** property documentaion */
+    optionalProp: T.string
   }
+
+  static defaultProps = {
+    optionalProp: "default value"
+  }
+
+  state = {}
 
   render() {
     return(
@@ -14,8 +28,4 @@ export class <%= name %> extends React.Component {
     )
   }
 }
-
-<%= name %>.propTypes = {}
-<%= name %>.defaultProps = {}
-
 export default <%= name %>
