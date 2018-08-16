@@ -1,0 +1,14 @@
+import React from "react"
+import { shallow } from "enzyme"
+
+// require code under test to be directly exported
+import { <%= name %> } from "./<%= name %>"
+// if code under test is exported as a default use
+// import <%= name %> from "./<%= name %>"
+
+describe("<%= name %>", () => {
+  it("renders the <%= name %> component", () => {
+    const actual = shallow(<<%= name %>/>) // don't forget to add required props
+    expect(actual).toMatchSnapshot()
+  })
+})

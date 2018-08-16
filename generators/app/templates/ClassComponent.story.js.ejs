@@ -1,0 +1,33 @@
+import React from "react"
+import T from "prop-types"
+import { storiesOf } from "@storybook/react"
+import { action } from "@storybook/addon-actions"
+import { <%= name %> } from "./<%= name %>"
+import docString from "./<%= name %>.md"
+
+// See https://storybook.js.org/basics/writing-stories/ for more info
+
+class Consumer extends React.Component {
+  static propTypes = {
+    data: T.any,
+    callback: T.func
+  }
+
+  render() {
+    return (
+      <div>
+        <div dangerouslySetInnerHtml={{ __html: docString }}
+        <<%= name %> data={this.props.data} callback={this.props.callback} />
+      </div>
+    )
+  }
+}
+
+storiesOf("<%= name %>", module)
+  .add('example', () => {
+    // Define properties, callbacks, etc., then invoke the Consumer
+    <Consumer
+      data={data}
+      callback={action('Callback from <%= name %>')}
+    />
+  })
