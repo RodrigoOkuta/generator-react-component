@@ -1,8 +1,8 @@
-"use strict";
-const Generator = require("yeoman-generator");
-const chalk = require("chalk");
-const yosay = require("yosay");
-const path = require("path");
+"use strict"
+const Generator = require("yeoman-generator")
+const chalk = require("chalk")
+const yosay = require("yosay")
+const path = require("path")
 
 module.exports = class extends Generator {
   prompting() {
@@ -13,7 +13,7 @@ module.exports = class extends Generator {
           chalk.red("generator-react-class-component") +
           " generator!"
       )
-    );
+    )
 
     const prompts = [
       {
@@ -35,63 +35,57 @@ module.exports = class extends Generator {
         default: true
       },
       {
-        type: "list",
-        name: "specOrTest",
-        message: "use `test` or `spec`?",
-        choices: ["test", "spec"],
-        filter: function(val) {
-          return val.toLowerCase();
-        },
-        default: "test"
-      },
-      {
         type: "confirm",
         name: "addStory",
         message: "Include story for storybook?",
-        default: false
+        default: true
       },
       {
-        type: "input",
-        name: "storyExt",
-        message: "Extention to use for story:",
-        default: "story"
+        type: "confirm",
+        name: "addMarkdown",
+        message: "Add markdown file?",
+        default: true
       }
-    ];
+    ]
 
     return this.prompt(prompts).then(answers => {
-      this.answers = answers;
-    });
+      this.answers = answers
+    })
   }
 
   writing() {
-    const folder = path.resolve(this.answers.folder);
+    const folder = path.resolve(this.answers.folder)
 
     this.fs.copyTpl(
       this.templatePath("ClassComponent.js.ejs"),
       this.destinationPath(path.join(folder, `${this.answers.name}.js`)),
       { name: this.answers.name }
-    );
+    )
 
     if (this.answers.addTest) {
       this.fs.copyTpl(
         this.templatePath("ClassComponent.spec.js.ejs"),
-        this.destinationPath(
-          path.join(folder, `${this.answers.name}.${this.answers.specOrTest}.js`)
-        ),
+        this.destinationPath(path.join(folder, `${this.answers.name}.spec.js`)),
         { name: this.answers.name }
-      );
+      )
     }
 
     if (this.answers.addStory) {
       this.fs.copyTpl(
         this.templatePath("ClassComponent.story.js.ejs"),
-        this.destinationPath(
-          path.join(folder, `${this.answers.name}.${this.answers.storyExt}.js`)
-        ),
+        this.destinationPath(path.join(folder, `${this.answers.name}.story.js`)),
         { name: this.answers.name }
-      );
+      )
+    }
+
+    if (this.answers.addMarkdown) {
+      this.fs.copyTpl(
+        this.templatePath("ClassComponent.md.ejs"),
+        this.destinationPath(path.join(folder, `${this.answers.name}.md`)),
+        { name: this.answers.name }
+      )
     }
   }
 
   install() {}
-};
+}
