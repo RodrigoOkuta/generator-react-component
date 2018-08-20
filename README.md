@@ -2,11 +2,14 @@
 
 > Generate a React class component (class extends React.Component), with collateral files including spec test, storybook story, and markdown documentation file.
 
+## Prerequistes
+
+- [Node.js](https://nodejs.org)
+- [Yeoman](http://yeoman.io)
+
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and generator-react-class-component using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
-
-Next, clone this repository (or your own fork of it) and link it locally
+Clone this repository (or your own fork of it) and link it locally
 
 ```bash
 git clone https://github.com/tamouse/generator-react-class-component.git
@@ -14,7 +17,9 @@ cd generateor-react-class-component
 npm link
 ```
 
-Then generate your new project:
+## Usage
+
+In your react project,generate your new component:
 
 ```bash
 yo react-class-component
@@ -28,12 +33,16 @@ The generator will ask:
 - if you want to create a story for storybook
 - if you want to create a markdown file for documentation (automatically used in the storybook file above)
 
-The generator will create (up to) 4 files:
+The generator will create (up to) 4 files in the directory specified:
 
 - `CompName.js` - the component class
 - `CompName.spec.js` - the spec test
 - `CompName.story.js` - the story file
 - `CompName.md` - the markdown file
+
+## Templates
+
+The templates are in `<generator-react-class-component>/generators/app/templates/` -- feel free to modify your fork to your own needs.
 
 ## Getting To Know Yeoman
 
