@@ -1,19 +1,11 @@
 import React from 'react'
 import T from 'prop-types'
 
-/**
- * class description
- */
 export class <%= name %> extends React.Component {
   static propTypes = {
-    /** property documentation */
-    requiredProp: T.string.isRequired,
-    /** property documentaion */
-    optionalProp: T.string
   }
 
   static defaultProps = {
-    optionalProp: "default value"
   }
 
   state = {}
@@ -21,7 +13,11 @@ export class <%= name %> extends React.Component {
   render() {
     return(
       <div>
-        <%= name %>
+        <h1><%= name %></h1>
+        <h3>Props:</h3>
+        <pre><code>{JSON.stringify(this.props, null, 2)}</code></pre>
+        <h3>State:</h3>
+        <pre><code>{JSON.stringify(this.state, null, 2)}</code></pre>
       </div>
     )
   }
