@@ -7,26 +7,21 @@ describe("generator-react-class-component:app", () => {
   describe("with default responses", () => {
     beforeAll(() => {
       return helpers.run(path.join(__dirname, "../generators/app")).withPrompts({
-        name: "MyComponent"
-      });
-    });
-
-    it("creates files", () => {
-      assert.file(["MyComponent.js", "MyComponent.test.js"]);
-    });
-  });
-  describe("with other responses", () => {
-    beforeAll(() => {
-      return helpers.run(path.join(__dirname, "../generators/app")).withPrompts({
+        folder: "/tmp/yoTest",
         name: "MyComponent",
-        addTest: false,
+        addTest: true,
         addStory: true,
-        storyExt: "storybook"
+        addMarkdown: true
       });
     });
 
     it("creates files", () => {
-      assert.file(["MyComponent.js", "MyComponent.storybook.js"]);
+      assert.file([
+        "/tmp/yoTest/MyComponent/index.js",
+        "/tmp/yoTest/MyComponent/spec.js",
+        "/tmp/yoTest/MyComponent/story.js",
+        "/tmp/yoTest/MyComponent/README.md"
+      ]);
     });
   });
 });
