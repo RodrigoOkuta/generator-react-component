@@ -1,8 +1,8 @@
-"use strict";
-const Generator = require("yeoman-generator");
-const chalk = require("chalk");
-const yosay = require("yosay");
-const path = require("path");
+"use strict"
+const Generator = require("yeoman-generator")
+const chalk = require("chalk")
+const yosay = require("yosay")
+const path = require("path")
 
 module.exports = class extends Generator {
   prompting() {
@@ -13,7 +13,7 @@ module.exports = class extends Generator {
           chalk.red("generator-react-class-component") +
           " generator awaits"
       )
-    );
+    )
 
     const prompts = [
       {
@@ -21,6 +21,18 @@ module.exports = class extends Generator {
         name: "folder",
         message: "Where do you want to create the component?",
         default: path.resolve(".")
+      },
+      {
+        type: "confirm",
+        name: "classComp",
+        message: "Create a class component?",
+        default: true
+      },
+      {
+        type: "confirm",
+        name: "subdir",
+        message: "Shall I create a subdirectory for this component?",
+        default: true
       },
       {
         type: "input",
@@ -46,47 +58,61 @@ module.exports = class extends Generator {
         message: "Add markdown file?",
         default: true
       }
-    ];
+    ]
 
     return this.prompt(prompts).then(answers => {
-      this.answers = answers;
-    });
+      this.answers = answers
+    })
   }
 
   writing() {
-    const parent = path.resolve(this.answers.folder);
-    const dest = path.join(parent, this.answers.name);
+    const parent = path.resolve(this.answers.folder)
+    // const
+    let dest = {}
+    if (this.answers.subdir) {
+      dest.main = path.join(parent, this.answers.name, "index.js")
+      dest.spec = path.join(parent, this.answers.name, "spec.js")
+      dest.story = path.join(parent, this.answers.name, "story.js")
+      dest.readme = path.join(parent, this.answers.name, "README.md")
+    } else {
+      dest.main = path.join(parent, `${this.answers.name}.js`)
+      dest.spec = path.join(parent, `${this.answers.name}.spec.js`)
+      dest.story = path.join(parent, `${this.answers.name}.story.js`)
+      dest.readme = path.join(parent, `${this.answers.name}.md`)
+    }
 
     this.fs.copyTpl(
-      this.templatePath("ClassComponent.js.ejs"),
-      this.destinationPath(path.join(dest, "index.js")),
+      this.templatePath(
+        this.answers.class ? "ClassComponent.js.ejs" : "FunctionalComponent.js.ejs"
+      ),
+      this.destinationPath(dest.main),
       { name: this.answers.name }
-    );
+    )
 
     if (this.answers.addTest) {
       this.fs.copyTpl(
         this.templatePath("ClassComponent.spec.js.ejs"),
-        this.destinationPath(path.join(dest, "spec.js")),
+        this.destinationPath(path.spec),
         { name: this.answers.name }
-      );
+      )
     }
 
     if (this.answers.addStory) {
       this.fs.copyTpl(
         this.templatePath("ClassComponent.story.js.ejs"),
-        this.destinationPath(path.join(dest, "story.js")),
+        this.destinationPath(dest.story),
         { name: this.answers.name }
-      );
+      )
     }
 
     if (this.answers.addMarkdown) {
       this.fs.copyTpl(
         this.templatePath("ClassComponent.md.ejs"),
-        this.destinationPath(path.join(dest, `README.md`)),
+        this.destinationPath(dest.readme),
         { name: this.answers.name }
-      );
+      )
     }
   }
 
   install() {}
-};
+}
