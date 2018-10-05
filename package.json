@@ -46,7 +46,8 @@
     "pretty": "prettier --write '{generators,__tests__}/**/*.js'",
     "pretest": "npm run pretty && eslint .",
     "precommit": "lint-staged",
-    "test": "jest"
+    "test": "jest",
+    "jestwatch": "jest --watch"
   },
   "lint-staged": {
     "*.js": [

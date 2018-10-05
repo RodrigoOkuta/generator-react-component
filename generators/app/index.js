@@ -67,7 +67,7 @@ module.exports = class extends Generator {
 
   writing() {
     const parent = path.resolve(this.answers.folder)
-    // const
+
     let dest = {}
     if (this.answers.subdir) {
       dest.main = path.join(parent, this.answers.name, "index.js")
@@ -81,18 +81,18 @@ module.exports = class extends Generator {
       dest.readme = path.join(parent, `${this.answers.name}.md`)
     }
 
-    this.fs.copyTpl(
-      this.templatePath(
-        this.answers.class ? "ClassComponent.js.ejs" : "FunctionalComponent.js.ejs"
-      ),
-      this.destinationPath(dest.main),
-      { name: this.answers.name }
-    )
+    const compTempatePath = this.answers.classComp
+      ? "ClassComponent.js.ejs"
+      : "FunctionalComponent.js.ejs"
+
+    this.fs.copyTpl(this.templatePath(compTempatePath), this.destinationPath(dest.main), {
+      name: this.answers.name
+    })
 
     if (this.answers.addTest) {
       this.fs.copyTpl(
         this.templatePath("ClassComponent.spec.js.ejs"),
-        this.destinationPath(path.spec),
+        this.destinationPath(dest.spec),
         { name: this.answers.name }
       )
     }
