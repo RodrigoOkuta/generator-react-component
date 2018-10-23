@@ -44,14 +44,16 @@
   },
   "scripts": {
     "pretty": "prettier --write '{generators,__tests__}/**/*.js'",
-    "pretest": "npm run pretty && eslint .",
+    "linter": "eslint generators --fix",
+    "pretest": "npm run pretty && npm run linter",
     "precommit": "lint-staged",
     "test": "jest",
     "jestwatch": "jest --watch"
   },
   "lint-staged": {
     "*.js": [
-      "eslint --fix",
+      "npm run pretty",
+      "npm run linter",
       "git add"
     ],
     "*.json": [

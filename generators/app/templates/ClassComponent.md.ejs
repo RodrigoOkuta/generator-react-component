@@ -1,13 +1,4 @@
-## <%= name %>
-
-Synopsis
-
-#### Props
-
-- `requiredProp` \[Type\] (required) description
-- `optionalProp` \[Type\] (optional) description
-
-<!--
+## <%= props.name %>
 
 This will be displayed in the top of the story, providing documentation for your component.
 
@@ -18,8 +9,4 @@ Even better, if you install jsdoc and jsdoc-to-markdown:
 *And* you write jsdoc-style documentation in your component, you can extract it and replace
 this file with the output:
 
-    jsdoc2md index.js > README.md
-
-
-
--->
+    jsdoc2md <%= props.subdir ? "index.js" : props.name + ".js" %> > <%= props.subdir ? "README.md" : props.name + "md" %>

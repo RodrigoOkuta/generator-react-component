@@ -1,7 +1,7 @@
 import React from 'react'
 import T from 'prop-types'
 
-export class <%= name %> extends React.Component {
+export class <%= props.name %> extends React.Component {
   static propTypes = {
   }
 
@@ -13,7 +13,7 @@ export class <%= name %> extends React.Component {
   render() {
     return(
       <div>
-        <h1><%= name %></h1>
+        <h1><%= props.name %></h1>
         <h3>Props:</h3>
         <pre><code>{JSON.stringify(this.props, null, 2)}</code></pre>
         <h3>State:</h3>
@@ -22,4 +22,4 @@ export class <%= name %> extends React.Component {
     )
   }
 }
-export default <%= name %>
+export default <%= props.name %>

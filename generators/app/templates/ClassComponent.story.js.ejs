@@ -1,13 +1,12 @@
+// See https://storybook.js.org/basics/writing-stories/ for more info
 import React from "react"
 import T from "prop-types"
 import { storiesOf } from "@storybook/react"
 import { action } from "@storybook/addon-actions"
 import { Panel } from "react-bootstrap"
 
-import { <%= name %> } from "./index"
-import docString from "./README.md"
-
-// See https://storybook.js.org/basics/writing-stories/ for more info
+import { <%= props.name %> } from "<%= props.subdir ? "./index.js" : props.name  %>"
+import docString from "<%= props.subdir ? "./README.MD" : props.name + ".md" %>"
 
 class Consumer extends React.Component {
   static propTypes = {
@@ -18,30 +17,30 @@ class Consumer extends React.Component {
   render() {
     return (
       <div>
-        <div dangerouslySetInnerHTML={{ __html: docString }} />
         <Panel>
           <Panel.Heading>
             <Panel.Title>example</Panel.Title>
           </Panel.Heading>
           <Panel.Body>
-            <<%= name %>
+            <<%= props.name %>
               data={this.props.data}
               callback={this.props.callback}
             />
           </Panel.Body>
         </Panel>
+        <div dangerouslySetInnerHTML={{ __html: docString }} style={{margin: 20}} />
       </div>
     )
   }
 }
 
-storiesOf("<%= name %>", module)
+storiesOf("<%= props.name %>", module)
   .add('example', () => {
     // Define properties, callbacks, etc., then invoke the Consumer
     return (
       <Consumer
         data={data}
-        callback={action('Callback from <%= name %>')}
+        callback={action('Callback from <%= props.name %>')}
       />
     )
   })

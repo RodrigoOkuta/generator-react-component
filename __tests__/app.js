@@ -1,9 +1,9 @@
-"use strict"
-var os = require("os")
-var fs = require("fs")
-var path = require("path")
-var assert = require("yeoman-assert")
-var helpers = require("yeoman-test")
+"use strict";
+var os = require("os");
+var fs = require("fs");
+var path = require("path");
+var assert = require("yeoman-assert");
+var helpers = require("yeoman-test");
 
 describe("generator-react-class-component:app", () => {
   it("creates class component in destination, no subdir", () => {
@@ -25,9 +25,9 @@ describe("generator-react-class-component:app", () => {
           path.join("MyComponent.spec.js"),
           path.join("MyComponent.story.js"),
           path.join("MyComponent.md")
-        ])
-      })
-  })
+        ]);
+      });
+  });
 
   it("creates functional component in destination, no subdir", () => {
     return helpers
@@ -48,9 +48,9 @@ describe("generator-react-class-component:app", () => {
           path.join("MyComponent.spec.js"),
           path.join("MyComponent.story.js"),
           path.join("MyComponent.md")
-        ])
-      })
-  })
+        ]);
+      });
+  });
 
   it("creates class component in destination, with subdir", () => {
     return helpers
@@ -71,7 +71,7 @@ describe("generator-react-class-component:app", () => {
           path.join("MyComponent", "spec.js"),
           path.join("MyComponent", "story.js"),
           path.join("MyComponent", "README.md")
-        ])
-      })
-  })
-})
+        ]);
+      });
+  });
+});

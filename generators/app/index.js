@@ -1,8 +1,8 @@
-"use strict"
-const Generator = require("yeoman-generator")
-const chalk = require("chalk")
-const yosay = require("yosay")
-const path = require("path")
+"use strict";
+const Generator = require("yeoman-generator");
+const chalk = require("chalk");
+const yosay = require("yosay");
+const path = require("path");
 
 module.exports = class extends Generator {
   prompting() {
@@ -13,7 +13,7 @@ module.exports = class extends Generator {
           chalk.red("generator-react-class-component") +
           " generator awaits"
       )
-    )
+    );
 
     const prompts = [
       {
@@ -58,61 +58,61 @@ module.exports = class extends Generator {
         message: "Add markdown file?",
         default: true
       }
-    ]
+    ];
 
     return this.prompt(prompts).then(answers => {
-      this.answers = answers
-    })
+      this.answers = answers;
+    });
   }
 
   writing() {
-    const parent = path.resolve(this.answers.folder)
+    const parent = path.resolve(this.answers.folder);
 
-    let dest = {}
+    let dest = {};
     if (this.answers.subdir) {
-      dest.main = path.join(parent, this.answers.name, "index.js")
-      dest.spec = path.join(parent, this.answers.name, "spec.js")
-      dest.story = path.join(parent, this.answers.name, "story.js")
-      dest.readme = path.join(parent, this.answers.name, "README.md")
+      dest.main = path.join(parent, this.answers.name, "index.js");
+      dest.spec = path.join(parent, this.answers.name, "spec.js");
+      dest.story = path.join(parent, this.answers.name, "story.js");
+      dest.readme = path.join(parent, this.answers.name, "README.md");
     } else {
-      dest.main = path.join(parent, `${this.answers.name}.js`)
-      dest.spec = path.join(parent, `${this.answers.name}.spec.js`)
-      dest.story = path.join(parent, `${this.answers.name}.story.js`)
-      dest.readme = path.join(parent, `${this.answers.name}.md`)
+      dest.main = path.join(parent, `${this.answers.name}.js`);
+      dest.spec = path.join(parent, `${this.answers.name}.spec.js`);
+      dest.story = path.join(parent, `${this.answers.name}.story.js`);
+      dest.readme = path.join(parent, `${this.answers.name}.md`);
     }
 
     const compTempatePath = this.answers.classComp
       ? "ClassComponent.js.ejs"
-      : "FunctionalComponent.js.ejs"
+      : "FunctionalComponent.js.ejs";
 
     this.fs.copyTpl(this.templatePath(compTempatePath), this.destinationPath(dest.main), {
-      name: this.answers.name
-    })
+      props: this.answers
+    });
 
     if (this.answers.addTest) {
       this.fs.copyTpl(
         this.templatePath("ClassComponent.spec.js.ejs"),
         this.destinationPath(dest.spec),
-        { name: this.answers.name }
-      )
+        { props: this.answers }
+      );
     }
 
     if (this.answers.addStory) {
       this.fs.copyTpl(
         this.templatePath("ClassComponent.story.js.ejs"),
         this.destinationPath(dest.story),
-        { name: this.answers.name }
-      )
+        { props: this.answers }
+      );
     }
 
     if (this.answers.addMarkdown) {
       this.fs.copyTpl(
         this.templatePath("ClassComponent.md.ejs"),
         this.destinationPath(dest.readme),
-        { name: this.answers.name }
-      )
+        { props: this.answers }
+      );
     }
   }
 
   install() {}
-}
+};
