@@ -10,7 +10,7 @@ module.exports = class extends Generator {
     this.log(
       yosay(
         "Your humble servant, the " +
-          chalk.red("generator-react-class-component") +
+          chalk.yellow("generator-react-class-component") +
           " generator awaits"
       )
     );
@@ -57,6 +57,12 @@ module.exports = class extends Generator {
         name: "addMarkdown",
         message: "Add markdown file?",
         default: true
+      },
+      {
+        type: "confirm",
+        name: "addStyle",
+        message: "Add style file?",
+        default: true
       }
     ];
 
@@ -73,11 +79,13 @@ module.exports = class extends Generator {
       dest.main = path.join(parent, this.answers.name, "index.js");
       dest.spec = path.join(parent, this.answers.name, "spec.js");
       dest.story = path.join(parent, this.answers.name, "story.js");
+      dest.style = path.join(parent, this.answers.name, "style.js");
       dest.readme = path.join(parent, this.answers.name, "README.md");
     } else {
       dest.main = path.join(parent, `${this.answers.name}.js`);
       dest.spec = path.join(parent, `${this.answers.name}.spec.js`);
       dest.story = path.join(parent, `${this.answers.name}.story.js`);
+      dest.style = path.join(parent, `${this.answers.name}.style.js`);
       dest.readme = path.join(parent, `${this.answers.name}.md`);
     }
 
@@ -101,6 +109,14 @@ module.exports = class extends Generator {
       this.fs.copyTpl(
         this.templatePath("ClassComponent.story.js.ejs"),
         this.destinationPath(dest.story),
+        { props: this.answers }
+      );
+    }
+
+    if (this.answers.addStyle) {
+      this.fs.copyTpl(
+        this.templatePath("ClassComponent.style.js.ejs"),
+        this.destinationPath(dest.style),
         { props: this.answers }
       );
     }

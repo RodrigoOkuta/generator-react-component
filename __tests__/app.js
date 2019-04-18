@@ -17,6 +17,7 @@ describe("generator-react-class-component:app", () => {
         name: "MyComponent",
         addTest: true,
         addStory: true,
+        addStyle: true,
         addMarkdown: true
       })
       .then(() => {
@@ -24,6 +25,7 @@ describe("generator-react-class-component:app", () => {
           path.join("MyComponent.js"),
           path.join("MyComponent.spec.js"),
           path.join("MyComponent.story.js"),
+          path.join("MyComponent.style.js"),
           path.join("MyComponent.md")
         ]);
       });
@@ -40,6 +42,7 @@ describe("generator-react-class-component:app", () => {
         name: "MyComponent",
         addTest: true,
         addStory: true,
+        addStyle: true,
         addMarkdown: true
       })
       .then(() => {
@@ -47,6 +50,7 @@ describe("generator-react-class-component:app", () => {
           path.join("MyComponent.js"),
           path.join("MyComponent.spec.js"),
           path.join("MyComponent.story.js"),
+          path.join("MyComponent.style.js"),
           path.join("MyComponent.md")
         ]);
       });
@@ -63,6 +67,7 @@ describe("generator-react-class-component:app", () => {
         name: "MyComponent",
         addTest: true,
         addStory: true,
+        addStyle: true,
         addMarkdown: true
       })
       .then(() => {
@@ -70,6 +75,7 @@ describe("generator-react-class-component:app", () => {
           path.join("MyComponent", "index.js"),
           path.join("MyComponent", "spec.js"),
           path.join("MyComponent", "story.js"),
+          path.join("MyComponent", "style.js"),
           path.join("MyComponent", "README.md")
         ]);
       });

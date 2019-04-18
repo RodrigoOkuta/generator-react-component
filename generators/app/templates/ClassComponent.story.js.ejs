@@ -5,42 +5,13 @@ import { storiesOf } from "@storybook/react"
 import { action } from "@storybook/addon-actions"
 import { Panel } from "react-bootstrap"
 
-import { <%= props.name %> } from "<%= props.subdir ? "./index.js" : props.name  %>"
-import docString from "<%= props.subdir ? "./README.MD" : props.name + ".md" %>"
-
-class Consumer extends React.Component {
-  static propTypes = {
-    data: T.any,
-    callback: T.func
-  }
-
-  render() {
-    return (
-      <div>
-        <Panel>
-          <Panel.Heading>
-            <Panel.Title>example</Panel.Title>
-          </Panel.Heading>
-          <Panel.Body>
-            <<%= props.name %>
-              data={this.props.data}
-              callback={this.props.callback}
-            />
-          </Panel.Body>
-        </Panel>
-        <div dangerouslySetInnerHTML={{ __html: docString }} style={{margin: 20}} />
-      </div>
-    )
-  }
-}
+import { <%= props.name %> } from "<%= props.subdir ? "./index" : props.name  %>"
 
 storiesOf("<%= props.name %>", module)
   .add('example', () => {
     // Define properties, callbacks, etc., then invoke the Consumer
+    const props = {}
     return (
-      <Consumer
-        data={data}
-        callback={action('Callback from <%= props.name %>')}
-      />
+      <<%= props.name  %> {...props} />
     )
   })

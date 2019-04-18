@@ -1,8 +1,16 @@
 import React from 'react'
 import T from 'prop-types'
+// If you create styled components, put them in the <%= props.style %>.js file
+// import { StyledComp } from "./<%= props.style %>"
 
+/**
+ * <%= props.name %>
+ *
+ * @prop {type} propName description
+ */
 const propTypes = {}
 const defaultProps = {}
+
 export const <%= props.name %> = props => {
   return (
     <div><%= props.name %></div>
