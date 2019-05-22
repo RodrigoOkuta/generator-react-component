@@ -3,6 +3,11 @@ import T from 'prop-types'
 // If you create styled components, put them in the <%= props.style %>.js file
 // import { StyledComp } from "./<%= props.style %>"
 
+/**
+ * <%= props.name %>
+ *
+ * @class
+ */
 export class <%= props.name %> extends React.Component {
   static propTypes = {
   }
@@ -15,11 +20,7 @@ export class <%= props.name %> extends React.Component {
   render() {
     return(
       <div>
-        <h1><%= props.name %></h1>
-        <h3>Props:</h3>
-        <pre><code>{JSON.stringify(this.props, null, 2)}</code></pre>
-        <h3>State:</h3>
-        <pre><code>{JSON.stringify(this.state, null, 2)}</code></pre>
+        <%= props.name %>
       </div>
     )
   }
