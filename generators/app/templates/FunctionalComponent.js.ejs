@@ -6,17 +6,14 @@ import T from 'prop-types'
 /**
  * <%= props.name %>
  *
- * @prop {type} propName description
+ * @function
  */
-const propTypes = {}
-const defaultProps = {}
-
 export const <%= props.name %> = props => {
   return (
     <div><%= props.name %></div>
   )
 }
 
-<%= props.name %>.propTypes = propTypes
-<%= props.name %>.defaultProps = defaultProps
+<%= props.name %>.propTypes = {};
+<%= props.name %>.defaultProps = {};
 export default <%= props.name %>

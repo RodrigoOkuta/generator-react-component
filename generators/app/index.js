@@ -10,18 +10,12 @@ module.exports = class extends Generator {
     this.log(
       yosay(
         "Your humble servant, the " +
-          chalk.yellow("generator-react-class-component") +
+          chalk.yellow("generator-react-component") +
           " generator awaits"
       )
     );
 
     const prompts = [
-      {
-        type: "input",
-        name: "folder",
-        message: "Where do you want to create the component?",
-        default: path.resolve(".")
-      },
       {
         type: "confirm",
         name: "classComp",
@@ -72,7 +66,7 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    const parent = path.resolve(this.answers.folder);
+    const parent = path.resolve(".");
 
     let dest = {};
     if (this.answers.subdir) {

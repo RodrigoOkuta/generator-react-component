@@ -1,14 +1,12 @@
-import React from "react"
-import { shallow } from "enzyme"
-
-// requires code under test to be directly exported
-import { <%= props.name %> } from "./index"
-// if code under test is exported as a default use
-// import <%= props.name %> from "./index"
+import React from "react";
+// import { shallow } from "enzyme"
+import { render, cleanup, fireEvent, waitForElement } from "react-testing-library";
+// import { renderHook, act } from 'react-hooks-testing-library'
+import { <%= props.name %> } from "./index";
 
 describe.skip("<%= props.name %>", () => {
   it("renders the <%= props.name %> component", () => {
-    const actual = shallow(<<%= props.name %>/>) // don't forget to add required props
-    expect(actual).toMatchSnapshot()
+    const {getByText, getByTestId, container, asFragment} = render(<<%= props.name %> />);
+    expect(container.firstChild).toMatchSnapshot();
   })
 })

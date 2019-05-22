@@ -1,5 +1,7 @@
 # generator-react-class-component
 
+**Note:** this has become much more than just a class generator
+
 > Generate a React class component (`class Foo extends React.Component`) or functional component (`const Foo = props => {}`), with collateral files including spec test, storybook story, and markdown documentation file.
 
 ## Prerequistes
@@ -25,21 +27,24 @@ In your react project,generate your new component:
 yo react-class-component
 ```
 
+**New**: the generator no longer asks where you want to place the component. I assumes you want it in the current working directory (just like most other yeoman generators).
+
 The generator will ask:
 
-- where you want to create the component (default is `.`)
 - whether you want to make a class or functional component
 - whether you want to make a subdirectory for the component
 - the Name of the component (PascalCase is BestCase)
 - if you want to create a spec test
 - if you want to create a story for storybook
 - if you want to create a markdown file for documentation (automatically used in the storybook file above)
+- if you want to create a style file
 
 The generator will create (up to) 4 files in the directory specified:
 
 - `CompName.js` - the component class
 - `CompName.spec.js` - the spec test
 - `CompName.story.js` - the story file
+- `CompName.style.js` - the story file
 - `CompName.md` - the markdown file
 
 If a new subdirectory is chosen, the files will be:
@@ -47,6 +52,7 @@ If a new subdirectory is chosen, the files will be:
 - `CompName/index.js`
 - `CompName/spec.js`
 - `CompName/story.js`
+- `CompName/style.js`
 - `CompName/README.md`
 
 ## Templates
