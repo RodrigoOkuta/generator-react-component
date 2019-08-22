@@ -1,5 +1,6 @@
-import React from 'react'
-import T from 'prop-types'
+import React, { Component, Fragment } from 'react'
+// see https://reactjs.org/docs/typechecking-with-proptypes.html :
+import { array, bool, func, number, string, objecxt, symbol, node, element, elementType, instanceOf, ondOf, oneOfType, arrayOf, objectOf, shape, exact, any } from 'prop-types'
 // import { StyledComp } from "./<%= props.style %>"
 
 /**
@@ -7,12 +8,10 @@ import T from 'prop-types'
  *
  * @class
  */
-export class <%= props.name %> extends React.Component {
-  static propTypes = {
-  }
+export class <%= props.name %> extends Component {
+  static propTypes = {}
 
-  static defaultProps = {
-  }
+  static defaultProps = {}
 
   state = {}
 

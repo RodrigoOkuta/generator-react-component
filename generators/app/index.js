@@ -19,8 +19,8 @@ module.exports = class extends Generator {
       {
         type: "confirm",
         name: "classComp",
-        message: "Create a class component?",
-        default: true
+        message: "Create a class component? (prefer Functional Components)",
+        default: false
       },
       {
         type: "confirm",
@@ -31,7 +31,7 @@ module.exports = class extends Generator {
       {
         type: "input",
         name: "name",
-        message: "What is the Class's Name?",
+        message: "What is the Component's Name?",
         default: "MyComponent"
       },
       {
@@ -48,14 +48,14 @@ module.exports = class extends Generator {
       },
       {
         type: "confirm",
-        name: "addMarkdown",
-        message: "Add markdown file?",
+        name: "addStyle",
+        message: "Add style file?",
         default: true
       },
       {
         type: "confirm",
-        name: "addStyle",
-        message: "Add style file?",
+        name: "addMarkdown",
+        message: "Add markdown file?",
         default: true
       }
     ];
@@ -66,60 +66,63 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    const parent = path.resolve(".");
-
-    let dest = {};
+    let props = {
+      name: this.answers.name,
+      isClass: this.answers.classComp,
+      isSubdir: this.answers.subdir,
+      dest: path.resolve(".")
+    };
     if (this.answers.subdir) {
-      dest.main = path.join(parent, this.answers.name, "index.js");
-      dest.spec = path.join(parent, this.answers.name, "spec.js");
-      dest.story = path.join(parent, this.answers.name, "story.js");
-      dest.style = path.join(parent, this.answers.name, "style.js");
-      dest.readme = path.join(parent, this.answers.name, "README.md");
+      props.main = path.join(this.answers.name, "index.js");
+      props.spec = path.join(this.answers.name, "spec.js");
+      props.story = path.join(this.answers.name, "story.js");
+      props.style = path.join(this.answers.name, "style.js");
+      props.readme = path.join(this.answers.name, "README.md");
     } else {
-      dest.main = path.join(parent, `${this.answers.name}.js`);
-      dest.spec = path.join(parent, `${this.answers.name}.spec.js`);
-      dest.story = path.join(parent, `${this.answers.name}.story.js`);
-      dest.style = path.join(parent, `${this.answers.name}.style.js`);
-      dest.readme = path.join(parent, `${this.answers.name}.md`);
+      props.main = path.join(`${this.answers.name}.js`);
+      props.spec = path.join(`${this.answers.name}.spec.js`);
+      props.story = path.join(`${this.answers.name}.story.js`);
+      props.style = path.join(`${this.answers.name}.style.js`);
+      props.readme = path.join(`${this.answers.name}.md`);
     }
 
     const compTempatePath = this.answers.classComp
       ? "ClassComponent.js.ejs"
       : "FunctionalComponent.js.ejs";
 
-    this.fs.copyTpl(this.templatePath(compTempatePath), this.destinationPath(dest.main), {
-      props: this.answers
-    });
+    this.fs.copyTpl(
+      this.templatePath(compTempatePath),
+      this.destinationPath(path.join(props.parent, props.main)),
+      {
+        props
+      }
+    );
 
     if (this.answers.addTest) {
       this.fs.copyTpl(
-        this.templatePath("ClassComponent.spec.js.ejs"),
-        this.destinationPath(dest.spec),
-        { props: this.answers }
+        this.templatePath("Component.spec.js.ejs"),
+        this.destinationPath(path.join(props.parent, props.spec), { props })
       );
     }
 
     if (this.answers.addStory) {
       this.fs.copyTpl(
-        this.templatePath("ClassComponent.story.js.ejs"),
-        this.destinationPath(dest.story),
-        { props: this.answers }
+        this.templatePath("Component.story.js.ejs"),
+        this.destinationPath(path.join(props.parent, props.story), { props })
       );
     }
 
     if (this.answers.addStyle) {
       this.fs.copyTpl(
-        this.templatePath("ClassComponent.style.js.ejs"),
-        this.destinationPath(dest.style),
-        { props: this.answers }
+        this.templatePath("Component.style.js.ejs"),
+        this.destinationPath(path.join(props.parent, props.style), { props })
       );
     }
 
     if (this.answers.addMarkdown) {
       this.fs.copyTpl(
-        this.templatePath("ClassComponent.md.ejs"),
-        this.destinationPath(dest.readme),
-        { props: this.answers }
+        this.templatePath("Component.md.ejs"),
+        this.destinationPath(path.join(props.parent, props.readme), { props })
       );
     }
   }

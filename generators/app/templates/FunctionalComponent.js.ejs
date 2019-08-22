@@ -1,5 +1,6 @@
-import React from 'react'
-import T from 'prop-types'
+import React, { useState, useEffect, useContext, useReducer, useCallback, useMemo, useRef, useLayoutEffect } from 'react'
+// see https://reactjs.org/docs/typechecking-with-proptypes.html :
+import { array, bool, func, number, string, objecxt, symbol, node, element, elementType, instanceOf, ondOf, oneOfType, arrayOf, objectOf, shape, exact, any } from 'prop-types'
 // If you create styled components, put them in the <%= props.style %>.js file
 // import { StyledComp } from "./<%= props.style %>"
 
@@ -10,7 +11,9 @@ import T from 'prop-types'
  */
 export const <%= props.name %> = props => {
   return (
-    <div><%= props.name %></div>
+    <>
+      Your <%= props.name %> content goes here.
+    </>
   )
 }
 

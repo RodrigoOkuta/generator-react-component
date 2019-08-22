@@ -1,12 +1,18 @@
 // See https://storybook.js.org/basics/writing-stories/ for more info
 import React from "react"
-// import T from "prop-types"
 import { storiesOf } from "@storybook/react"
 import { action } from "@storybook/addon-actions"
 
-import { <%= props.name %> } from "<%= props.subdir ? "./index" : props.name  %>"
+// NOTE: If your component depends on any provider / wrappers, you need to import them or
+// emulated them. You can include them in the `addDecorator` call to make them available
+// for all of your examples.
+
+import { <%= props.name %> } from "./<%= props.main %>"
 
 storiesOf("<%= props.name %>", module)
+  .addDecorator(storyFn => (
+    >{storyFn()}</div>
+  ))
   .add('example', () => {
     // Define properties, callbacks, etc., then invoke the Consumer
     const props = {}
