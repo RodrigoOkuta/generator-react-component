@@ -5,13 +5,18 @@ import { action } from "@storybook/addon-actions"
 
 // NOTE: If your component depends on any provider / wrappers, you need to import them or
 // emulated them. You can include them in the `addDecorator` call to make them available
-// for all of your examples.
+// for all of your examples. For example:
+// import styled, {ThemeProvider} from "styled-components"
+// import theme from ".../theme" // fix the path
+//
+// then the decorator fn could be:
+//   storyFn => (<ThemeProvider theme={theme} >{storyFn()}</ThemeProvider)
 
-import { <%= props.name %> } from "./<%= props.main %>"
+import { <%= props.name %> } from "./<%= props.subdir ? "index" : props.main %>"
 
 storiesOf("<%= props.name %>", module)
   .addDecorator(storyFn => (
-    >{storyFn()}</div>
+    <div>{storyFn()}</div>
   ))
   .add('example', () => {
     // Define properties, callbacks, etc., then invoke the Consumer

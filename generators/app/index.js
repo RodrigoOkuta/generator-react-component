@@ -61,68 +61,82 @@ module.exports = class extends Generator {
     ];
 
     return this.prompt(prompts).then(answers => {
-      this.answers = answers;
+      this.props = {
+        answers,
+        name: answers.name,
+        isClass: answers.classComp,
+        isSubdir: answers.subdir
+      };
+      if (answers.subdir) {
+        this.props.main = path.join(answers.name, "index.js");
+        this.props.spec = path.join(answers.name, "spec.js");
+        this.props.story = path.join(answers.name, "story.js");
+        this.props.style = path.join(answers.name, "style.js");
+        this.props.readme = path.join(answers.name, "README.md");
+      } else {
+        this.props.main = path.join(`${answers.name}.js`);
+        this.props.spec = path.join(`${answers.name}.spec.js`);
+        this.props.story = path.join(`${answers.name}.story.js`);
+        this.props.style = path.join(`${answers.name}.style.js`);
+        this.props.readme = path.join(`${answers.name}.md`);
+      }
     });
   }
 
   writing() {
-    let props = {
-      name: this.answers.name,
-      isClass: this.answers.classComp,
-      isSubdir: this.answers.subdir,
-      parent: path.resolve(".")
-    };
-    if (this.answers.subdir) {
-      props.main = path.join(this.answers.name, "index.js");
-      props.spec = path.join(this.answers.name, "spec.js");
-      props.story = path.join(this.answers.name, "story.js");
-      props.style = path.join(this.answers.name, "style.js");
-      props.readme = path.join(this.answers.name, "README.md");
-    } else {
-      props.main = path.join(`${this.answers.name}.js`);
-      props.spec = path.join(`${this.answers.name}.spec.js`);
-      props.story = path.join(`${this.answers.name}.story.js`);
-      props.style = path.join(`${this.answers.name}.style.js`);
-      props.readme = path.join(`${this.answers.name}.md`);
-    }
+    const props = this.props;
+    const {
+      answers: { addTest, addStory, addStyle, addMarkdown, classComp }
+    } = props;
 
-    const compTempatePath = this.answers.classComp
-      ? "ClassComponent.js.ejs"
-      : "FunctionalComponent.js.ejs";
+    this.log(
+      yosay(`Properties:
+
+${JSON.stringify(props, null, 2)}
+
+`)
+    );
+
+    // Force to be the current dir
+    this.destinationRoot(this.contextRoot);
 
     this.fs.copyTpl(
-      this.templatePath(compTempatePath),
-      this.destinationPath(path.join(props.parent, props.main)),
+      this.templatePath(`${classComp ? "Class" : "Functional"}Component.js.ejs`),
+      this.destinationPath(props.main),
       {
         props
       }
     );
 
-    if (this.answers.addTest) {
+    if (addTest) {
       this.fs.copyTpl(
         this.templatePath("Component.spec.js.ejs"),
-        this.destinationPath(path.join(props.parent, props.spec), { props })
+        this.destinationPath(props.spec),
+        { props }
       );
     }
 
-    if (this.answers.addStory) {
+    if (addStory) {
       this.fs.copyTpl(
         this.templatePath("Component.story.js.ejs"),
-        this.destinationPath(path.join(props.parent, props.story), { props })
+        this.destinationPath(props.story),
+        { props }
       );
     }
 
-    if (this.answers.addStyle) {
+    if (addStyle) {
       this.fs.copyTpl(
         this.templatePath("Component.style.js.ejs"),
-        this.destinationPath(path.join(props.parent, props.style), { props })
+        this.destinationPath(props.style),
+        { props }
       );
     }
 
-    if (this.answers.addMarkdown) {
+    if (addMarkdown) {
       this.fs.copyTpl(
         this.templatePath("Component.md.ejs"),
-        this.destinationPath(path.join(props.parent, props.readme), { props })
+        this.destinationPath(props.readme),
+        { props }
       );
     }
   }

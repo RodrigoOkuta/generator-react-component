@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useContext, useReducer, useCallback, useMemo, useRef, useLayoutEffect } from 'react'
 // see https://reactjs.org/docs/typechecking-with-proptypes.html :
 import { array, bool, func, number, string, objecxt, symbol, node, element, elementType, instanceOf, ondOf, oneOfType, arrayOf, objectOf, shape, exact, any } from 'prop-types'
-// If you create styled components, put them in the <%= props.style %>.js file
-// import { StyledComp } from "./<%= props.style %>"
+
+// Styled Componenets, See: https://www.styled-components.com/docs
+// import styled from "styled-components" // if you only need a couple styled comps
+// If you create several styled components, put them in the <%= props.subdir ?  "style" : props.style %> file
+// import { StyledComp } from "./<%= props.subdir ?  "style" : props.style %>"
+// if you use a theme provider, make sure to note that; you may also need to import it for your spec and your story
 
 /**
  * <%= props.name %>

@@ -1,10 +1,63 @@
 import React from "react";
+
+// Testing Library: So much goodness here: See https://testing-library.com/docs/react-testing-library/intro
 import { render, cleanup, fireEvent, wait, waitForElement } from "@testing-library/react";
-import { <%= props.name %> } from "./<% props.main =%>";
+
+// Import and Providers and Wrappers your component under test requres to work properly
+// import {ThemeProvider} from "styled-components"
+// import {MockedProvider} from "@apollo/react-testing"
+// import {MemoryRouter} from "react-router-dom"
+// ... etc
+// Then you can create a function that wraps them all up:
+// function Providers({children, themeProps, apolloProps, routerProps}) {
+//   return (
+//     <ThemeProvider {...themeProps}>
+//       <MockedProvider {...apolloProps}>
+//         <MemoryRouter {...routerProps} >
+//           {children}
+//         </MemoryRouter>
+//       </MockedProvider>
+//     </ThemeProvider>
+//   )
+// }
+
+// The component under test:
+import { <%= props.name %> } from "./<%= props.subdir ? "index" : props.main %>";
 
 describe.skip("<%= props.name %>", () => {
   it("renders the <%= props.name %> component", () => {
-    const {getByText, getByTestId, container, asFragment} = render(<<%= props.name %> />);
+    // Make sure your tests tell a story
+
+    /** SETUP **/
+    const props = {
+      prop1: null,
+      prop2: jest.fn()
+    }
+    const {getByText, getByTestId, queryByText, queryByTestId, container, asFragment, rerender} = render(<<%= props.name %> {...props} />);
+
+    /** ACTION **/
+
+
+    /** VERIFICATION **/
     expect(container.firstChild).toMatchSnapshot();
   })
 })
+
+
+// If you're using MockedProvider, make sure your mocks follow this structure:
+//
+// const mocks = [
+//   {
+//     request: {
+//       query: QUERY_STRING,
+//       variables: { }
+//     },
+//     result: {
+//       data: {
+//         _query_: _results_
+//       }
+//     }
+//   }
+// ]
+//
+// See: https://www.apollographql.com/docs/react/recipes/testing/#mockedprovider
