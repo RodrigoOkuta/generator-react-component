@@ -70,7 +70,7 @@ module.exports = class extends Generator {
       name: this.answers.name,
       isClass: this.answers.classComp,
       isSubdir: this.answers.subdir,
-      dest: path.resolve(".")
+      parent: path.resolve(".")
     };
     if (this.answers.subdir) {
       props.main = path.join(this.answers.name, "index.js");
