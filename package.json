@@ -47,13 +47,14 @@
     "linter": "eslint generators --fix",
     "precommit": "lint-staged",
     "test": "jest",
-    "jestwatch": "jest --watch"
+    "jestwatch": "jest --watch",
+    "retestall": "jest . # "
   },
   "lint-staged": {
     "*.js": [
       "npm run pretty",
       "npm run linter",
-      "npm test",
+      "npm run retestall",
       "git add"
     ],
     "*.json": [
