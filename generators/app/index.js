@@ -3,7 +3,6 @@ const Generator = require("yeoman-generator");
 const chalk = require("chalk");
 const path = require("path");
 
-// Test Test
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
