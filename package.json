@@ -45,7 +45,6 @@
   "scripts": {
     "pretty": "prettier --write '{generators,__tests__}/**/*.js'",
     "linter": "eslint generators --fix",
-    "pretest": "npm run pretty && npm run linter",
     "precommit": "lint-staged",
     "test": "jest",
     "jestwatch": "jest --watch"
@@ -54,6 +53,7 @@
     "*.js": [
       "npm run pretty",
       "npm run linter",
+      "npm test",
       "git add"
     ],
     "*.json": [
