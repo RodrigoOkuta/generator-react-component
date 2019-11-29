@@ -1,18 +1,15 @@
 "use strict";
 const Generator = require("yeoman-generator");
 const chalk = require("chalk");
-const yosay = require("yosay");
 const path = require("path");
 
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
     this.log(
-      yosay(
-        "Your humble servant, the " +
-          chalk.yellow("generator-react-component") +
-          " generator awaits"
-      )
+      "Your humble servant, the " +
+        chalk.yellow("generator-react-component") +
+        " generator awaits"
     );
 
     const prompts = [
@@ -90,11 +87,11 @@ module.exports = class extends Generator {
     } = props;
 
     this.log(
-      yosay(`Properties:
+      `Properties:
 
 ${JSON.stringify(props, null, 2)}
 
-`)
+`
     );
 
     // Force to be the current dir
@@ -142,4 +139,8 @@ ${JSON.stringify(props, null, 2)}
   }
 
   install() {}
+
+  end() {
+    this.log(`Component ${this.props.name} created.`);
+  }
 };
