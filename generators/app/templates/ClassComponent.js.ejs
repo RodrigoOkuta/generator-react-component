@@ -14,15 +14,13 @@ import { array, bool, func, number, string, objecxt, symbol, node, element, elem
 export class <%= props.name %> extends Component {
   static propTypes = {}
 
-  static defaultProps = {}
-
   state = {}
 
   render() {
     return(
-      <div>
+      <Fragment>
         <%= props.name %>
-      </div>
+      </Fragment>
     )
   }
 }
